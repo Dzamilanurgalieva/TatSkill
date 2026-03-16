@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -12,19 +13,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+              body {
+            background-image: url('https://i.imgur.com/5LPeuJ8.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Фон остается на месте при прокрутке */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
         }
-        .navbar {
+
+        /* Затемнение фона (чтобы текст читался лучше) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0); /* Полупрозрачное черное затемнение */
+            z-index: -1; /* Отправляем затемнение назад */
+        }
+
+        /* ВСЕ БЛОКИ ОСТАЮТСЯ НЕПРОЗРАЧНЫМИ КАК БЫЛИ */
+        .navbar {<!--1 полоска -->
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 15px 0;
+            padding: 0 px 0;
+            position: relative;
+            background: rgba(255, 255, 255, 0.8);
         }
+
         .navbar-brand {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #4a6fa5;
+            color: #2d7b49;
         }
+        /* ТЕКСТ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
         .language-switch {
             display: flex;
             gap: 10px;
@@ -32,24 +58,195 @@
         }
         .lang-btn {
             padding: 5px 15px;
-            border: 2px solid #4a6fa5;
+            border: 2px solid #2d7b49;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 500;
         }
         .lang-btn.active {
-            background: #4a6fa5;
+            background: #2d7b49;
             color: white;
         }
-        .hero-section {
-            text-align: center;
-            padding: 80px 0;
-            background: linear-gradient(135deg, #4a6fa5 0%, #6b8cae 100%);
+        .btn-custom-green {
+            background-color: #2d7b49;
             color: white;
-            margin-bottom: 40px;
+            border: 2px solid #2d7b49;
         }
-        .main-button {
+
+        .btn-custom-green:hover {
+            background-color: #1e5a35;
+            border-color: #1e5a35;
+        }
+
+        .btn-outline-custom-green {
+            background-color: transparent;
+            color: #2d7b49;
+            border: 2px solid #2d7b49;
+        }
+
+        .btn-outline-custom-green:hover {
+            background-color: #2d7b49;
+            color: white;
+        }
+
+        /* Блок с аватаром - теперь однотонный */
+        .avatar-section {
+            background-image: url('https://i.imgur.com/D3fzpYF.jpeg'); /* Путь к вашему изображению */
+            background-size: cover; /* Растягивает изображение на весь блок */
+            background-position: center; /* Центрирует изображение */
+            background-repeat: no-repeat; /* Запрещает повторение */
+            color: white;
+            padding: 120px 0;
+            position: relative; /* Для затемнения, если нужно */
+        }
+
+        /* Добавьте затемнение, чтобы текст был лучше виден */
+        .avatar-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Черное полупрозрачное затемнение */
+            z-index: 1;
+        }
+
+        .avatar-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-left {
+            display: flex;
+            align-items: center;
+            gap: 90px;
+            flex-wrap: wrap;
+        }
+
+        .ornament-section {
+            background-image: url('https://i.imgur.com/5gfPNB7.jpeg');
+            background-size: 100% 70px;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 0;
+            position: relative;
+            height: 60px; /* Уменьшил с 50px до 15px - стал тоньше */
+            overflow: hidden;
+        }
+
+        .ornament-section .container {
+            position: relative;
+            z-index: 2;
+            height: 100%; /* Растягиваем на всю высоту */
+        }
+
+        .ornament-left {
+            display: flex;
+            align-items: center;
+            gap: 90px;
+            flex-wrap: wrap;
+            height: 100%; /* Растягиваем на всю высоту */
+        }
+          /* ДРАКОНЧИК !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+        .avatar-img {
+            width: 150px;
+            height: auto;
+            position: fixed;
+            bottom: 50px;
+            right: 0px;
+            z-index: 9999;
+            cursor: pointer;
+            transition: all 0.3s;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        .avatar-img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Всплывающая подсказка при наведении */
+        .avatar-img:hover::after {
+            content: 'Нужна помощь?';
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background: #2d7b49;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+ /*ТЕКСТ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+        .avatar-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            margin-top: -60px;
+            margin-left: 440px;  /* Сдвиг вправо */
+        }
+
+        .avatar-text-wrapper h1 {
+            color: white;  /* Белый цвет для заголовка */
+            margin-bottom: 10px;
+        }
+
+        .avatar-text-wrapper .lead {
+            color: white;  /* Белый цвет для подзаголовка */
+            font-size: 1.5rem;
+        }
+ /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+        .search-section {
+            background: transparent; /* Прозрачный фон, чтобы было видно аватар */
+            padding-bottom: 30px;
+            margin-top: -90px; /* Отрицательный margin поднимает блок вверх */
+            position: relative; /* Для управления z-index */
+            z-index: 10; /* Чтобы поиск был поверх аватара */
+        }
+
+        .search-container {
             background: white;
+            border-radius: 50px;
+            padding: 5px;
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .search-btn {
+            background: #2d7b49;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background:  #2d7b49????????;
+        }
+
+
+
+
+        /* Карточки разделов - теперь однотонные */
+        .section-card {
+            background: #f8f9fa; /* Убрал градиент, оставил светлый фон */
             border-radius: 15px;
             padding: 40px 20px;
             text-align: center;
@@ -60,34 +257,126 @@
             color: #333;
             display: block;
             height: 100%;
+            border: none;
         }
-        .main-button:hover {
+
+        .section-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             color: #333;
+            text-decoration: none;
         }
-        .button-icon {
+
+        .section-icon {
             font-size: 4rem;
             margin-bottom: 15px;
         }
-        .button-title {
+
+        .section-title {
             font-size: 1.8rem;
             font-weight: bold;
             margin-bottom: 10px;
+            color: #16a177;
         }
-        .btn-more {
-            background: #4a6fa5;
+
+        .section-desc {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Карточка маршрутов */
+        .routes-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .route-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .route-icon {
+            width: 40px;
+            height: 40px;
+            background: #2d7b49;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
+        }
+
+        .route-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .route-count {
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .btn-more {
+            background: #16a177;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
             text-decoration: none;
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background 0.3s;
         }
+
         .btn-more:hover {
-            background: #3a5a87;
+            background: #0e7a5a;
             color: white;
         }
+
+        /* Рейтинг */
+        .rating-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .rating-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .rating-place {
+            font-size: 1.8rem;
+            min-width: 50px;
+        }
+
+        .rating-name {
+            flex: 1;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        .rating-score {
+            background: #16a177;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
         footer {
             background: #333;
             color: white;
@@ -112,43 +401,67 @@
             </div>
 
             <div>
-                <a href="/login" class="btn btn-outline-primary me-2">Войти</a>
-                <a href="/register" class="btn btn-primary">Регистрация</a>
+                <a href="/login" class="btn btn-outline-custom-green me-2">Войти</a>
+                <a href="/register" class="btn btn-custom-green">Регистрация</a>
             </div>
         </div>
     </div>
 </nav>
 
-<!-- Герой блок -->
-<div class="hero-section">
+<!-- Блок с аватаром (как на фото) -->
+<div class="avatar-section">
     <div class="container">
-        <h1 class="display-3">TatarSkill</h1>
-        <p class="lead">Учись, путешествуй, открывай Татарстан</p>
+        <div class="avatar-left">
+            <img src="https://i.imgur.com/B1JNg55.png" alt="Аватар" class="avatar-img">
+            <div class="avatar-text-wrapper">
+                <h1 class="display-4">TatarSkill</h1>
+                <p class="lead">Учись, путешествуй, открывай Татарстан</p>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Главные кнопки -->
+<!-- Поисковая строка (теперь сразу под аватаром, на дне второй ленты) -->
+<div class="search-section">
+    <div class="container">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Найти курс, маршрут или место...">
+            <button class="search-btn">Найти</button>
+        </div>
+    </div>
+</div>
+
+<div class="ornament-section">
+    <div class="container">
+        <div class="ornament-left">
+            <!-- Здесь может быть какой-то контент -->
+            <p></p>
+        </div>
+    </div>
+</div>
+
+<!-- Главные разделы -->
 <div class="container mb-5">
     <div class="row g-4">
         <div class="col-md-4">
-            <a href="/education" class="main-button">
-                <div class="button-icon">📚</div>
-                <div class="button-title">ОБУЧЕНИЕ</div>
-                <div>ЕГЭ, ВПР, Олимпиады</div>
+            <a href="/education" class="section-card">
+                <div class="section-icon">📚</div>
+                <div class="section-title">ОБУЧЕНИЕ</div>
+                <div class="section-desc">ЕГЭ, ВПР, Олимпиады</div>
             </a>
         </div>
         <div class="col-md-4">
-            <a href="/travel" class="main-button">
-                <div class="button-icon">🧳</div>
-                <div class="button-title">ПУТЕШЕСТВИЯ</div>
-                <div>Найди команду для поездки</div>
+            <a href="/travel" class="section-card">
+                <div class="section-icon">🧳</div>
+                <div class="section-title">ПУТЕШЕСТВИЯ</div>
+                <div class="section-desc">Найди команду для поездки</div>
             </a>
         </div>
         <div class="col-md-4">
-            <a href="/ratings" class="main-button">
-                <div class="button-icon">🏆</div>
-                <div class="button-title">РЕЙТИНГИ</div>
-                <div>Топ учеников</div>
+            <a href="/ratings" class="section-card">
+                <div class="section-icon">🏆</div>
+                <div class="section-title">РЕЙТИНГИ</div>
+                <div class="section-desc">Таблица лидеров</div>
             </a>
         </div>
     </div>
@@ -156,39 +469,67 @@
 
 <!-- Популярные маршруты -->
 <div class="container mb-5">
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title mb-4">Популярные маршруты</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <p><i class="fas fa-landmark text-primary"></i> Казанский Кремль — <strong>? человека</strong></p>
-                    <p><i class="fas fa-church text-primary"></i> Свияжск — <strong>? человека</strong></p>
-                </div>
-                <div class="col-md-6">
-                    <p><i class="fas fa-mosque text-primary"></i> Болгар — <strong>? человек</strong></p>
-                    <p><i class="fas fa-mountain text-primary"></i> Елабуга — <strong>? человек</strong></p>
-                </div>
-            </div>
-            <a href="/travel" class="btn-more">Найти попутчиков →</a>
+    <div class="routes-card">
+        <h3 class="mb-4">Популярные маршруты</h3>
+
+        <div class="route-item">
+            <div class="route-icon"><i class="fas fa-landmark"></i></div>
+            <span class="route-name">Казанский Кремль</span>
+            <span class="route-count">? человека</span>
         </div>
+
+        <div class="route-item">
+            <div class="route-icon"><i class="fas fa-church"></i></div>
+            <span class="route-name">Свияжск</span>
+            <span class="route-count">? человека</span>
+        </div>
+
+        <div class="route-item">
+            <div class="route-icon"><i class="fas fa-mosque"></i></div>
+            <span class="route-name">Болгар</span>
+            <span class="route-count">? человек</span>
+        </div>
+
+        <div class="route-item">
+            <div class="route-icon"><i class="fas fa-mountain"></i></div>
+            <span class="route-name">Елабуга</span>
+            <span class="route-count">? человек</span>
+        </div>
+
+        <a href="/travel" class="btn-more">Найти попутчиков →</a>
     </div>
 </div>
 
 <!-- Топ учеников -->
 <div class="container mb-5">
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title mb-4">🏆 Топ учеников</h3>
-            <div class="row">
-                <div class="col-12">
-                    <p><span class="fs-3">🥇</span> Джамиля Н. — <strong>5000 баллов</strong></p>
-                    <p><span class="fs-3">🥈</span> Румейса Э. — <strong>4800 баллов</strong></p>
-                    <p><span class="fs-3">🥉</span> Арина М. — <strong>4500 баллов</strong></p>
-                    <p><span class="fs-3">🥉</span> Александр З. — <strong>4500 баллов</strong></p>
-                </div>
-            </div>
-            <a href="/ratings" class="btn-more">Весь рейтинг →</a>
+    <div class="rating-card">
+        <h3 class="mb-4">🏆 Топ учеников</h3>
+
+        <div class="rating-item">
+            <span class="rating-place">🥇</span>
+            <span class="rating-name">Рум</span>
+            <span class="rating-score">9000 баллов</span>
         </div>
+
+        <div class="rating-item">
+            <span class="rating-place">🥈</span>
+            <span class="rating-name">Джем</span>
+            <span class="rating-score">9000 баллов</span>
+        </div>
+
+        <div class="rating-item">
+            <span class="rating-place">🥉</span>
+            <span class="rating-name">Арина</span>
+            <span class="rating-score">4500 баллов</span>
+        </div>
+
+        <div class="rating-item">
+            <span class="rating-place">🥉</span>
+            <span class="rating-name">Александр</span>
+            <span class="rating-score">4500 баллов</span>
+        </div>
+
+        <a href="/ratings" class="btn-more">Весь рейтинг →</a>
     </div>
 </div>
 
@@ -203,3 +544,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

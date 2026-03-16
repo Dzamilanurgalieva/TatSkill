@@ -7,11 +7,11 @@ def home(request):
 
 def education(request):
     """Страница обучения"""
-    return HttpResponse("Страница обучения (ЕГЭ, ВПР, Олимпиады)")
+    return render(request, 'skill.html')
 
 def travel(request):
     """Страница путешествий"""
-    return HttpResponse("Страница поиска попутчиков по Татарстану")
+    return render(request, 'trips.html')
 
 def ratings(request):
     """Страница рейтингов"""

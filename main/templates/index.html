@@ -37,12 +37,23 @@
         }
 
         /* ВСЕ БЛОКИ ОСТАЮТСЯ НЕПРОЗРАЧНЫМИ КАК БЫЛИ */
-        .navbar {<!--1 полоска -->
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 0 px 0;
-            position: relative;
-            background: rgba(255, 255, 255, 0.8);
+        .navbar {
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.3); /* Обводка только сверху */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Обводка только снизу */
+            border-left: none; /* Убираем обводку слева */
+            border-right: none; /* Убираем обводку справа */
+            padding: 10px 20px;
+            position: absolute;
+            top: 20px;
+            left: 0px;
+            right: 0px;
+            width: auto;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            margin-top: -20px; /* Поднять на 1px вверх */
+            margin-bottom: 0px;
         }
 
         .navbar-brand {
@@ -96,8 +107,10 @@
             background-position: center; /* Центрирует изображение */
             background-repeat: no-repeat; /* Запрещает повторение */
             color: white;
-            padding: 120px 0;
+            padding: 190px 0;
             position: relative; /* Для затемнения, если нужно */
+            margin-top: -70px; /* Поднять на 1px вверх */
+            margin-bottom: -1px;
         }
 
         /* Добавьте затемнение, чтобы текст был лучше виден */
@@ -126,7 +139,7 @@
 
         .ornament-section {
             background-image: url('https://i.imgur.com/5gfPNB7.jpeg');
-            background-size: 100% 70px;
+            background-size: 100% 80px;
             background-position: center;
             background-repeat: no-repeat;
             color: white;
@@ -134,6 +147,20 @@
             position: relative;
             height: 60px; /* Уменьшил с 50px до 15px - стал тоньше */
             overflow: hidden;
+            margin-top: -8px; /* Поднять на 1px вверх */
+            margin-bottom: -1px; /* Поднять на 1px вниз */
+        }
+
+        .ornament-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2); /* Черное полупрозрачное затемнение */
+            z-index: 1;
+            pointer-events: none; /* Чтобы не мешало кликам */
         }
 
         .ornament-section .container {
@@ -185,7 +212,8 @@
         .avatar-text-wrapper {
             display: flex;
             flex-direction: column;
-            margin-top: -60px;
+            margin-top: 0px;
+            margin-bottom: -50px;
             margin-left: 440px;  /* Сдвиг вправо */
         }
 
@@ -207,16 +235,20 @@
             z-index: 10; /* Чтобы поиск был поверх аватара */
         }
 
+        /* Контейнер поиска - прозрачный */
         .search-container {
-            background: white;
+            background: rgba(255, 255, 255, 0.2); /* Очень прозрачный белый */
             border-radius: 50px;
             padding: 5px;
             display: flex;
             max-width: 600px;
             margin: 0 auto;
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px); /* Эффект матового стекла */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Легкая обводка */
         }
 
+        /* Поле ввода - прозрачное */
         .search-input {
             flex: 1;
             border: none;
@@ -224,25 +256,72 @@
             border-radius: 50px;
             font-size: 1.1rem;
             outline: none;
+            background: transparent; /* Прозрачный фон */
+            color: white; /* Белый текст */
         }
 
+        /* Текст-подсказка (placeholder) */
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7); /* Полупрозрачный белый */
+            font-weight: 300;
+        }
+
+        /* Кнопка Найти - полупрозрачная */
         .search-btn {
-            background: #2d7b49;
+            background: rgba(45, 123, 73, 0.7); /* Полупрозрачный зеленый */
             color: white;
             border: none;
             padding: 10px 30px;
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .search-btn:hover {
-            background:  #2d7b49????????;
+            background: rgba(30, 90, 53, 0.9); /* Чуть менее прозрачный при наведении */
+            transform: scale(1.05);
         }
 
+        /* Базовые стили для всех фото (общее) */
+        /* Базовые стили для всех фото (общее) */
+        .button-square-photo {
+            position: absolute;    /* Базовое позиционирование */
+            object-fit: cover;
+            border: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0);
+            z-index: 10;
+            transition: none;
+            pointer-events: none;
+        }
+
+        /* Индивидуальные настройки для фото ОБУЧЕНИЕ */
+        .photo-education {
+            width: 140px;           /* Нужный размер */
+            height: 240px;          /* Нужный размер */
+            top: 28px;            /* Позиция сверху */
+            right: 310px;           /* Позиция справа */
 
 
+        }
+
+        /* Индивидуальные настройки для фото ПУТЕШЕСТВИЯ */
+        .photo-travel {
+            width: 140px;           /* Нужный размер */
+            height: 240px;          /* Нужный размер */
+            top: 28px;            /* Позиция сверху */
+            right: 290px;
+        }
+
+        /* Индивидуальные настройки для фото ПРОФИЛЬ */
+        .photo-profile {
+            width: 140px;           /* Нужный размер */
+            height: 240px;          /* Нужный размер */
+            top: 28px;            /* Позиция сверху */
+            right: 290px;
+        }
 
         /* Карточки разделов - теперь однотонные */
         .section-card {
@@ -441,32 +520,48 @@
 </div>
 
 <!-- Главные разделы -->
+<!-- Главные разделы -->
+<!-- Главные разделы -->
 <div class="container mb-5">
     <div class="row g-4">
+        <!-- ОБУЧЕНИЕ -->
         <div class="col-md-4">
-            <a href="/education" class="section-card">
+            <a href="/education" class="section-card" style="position: relative; overflow: visible;">
+                <!-- Квадратное фото как у дракончика -->
+                <img src="https://i.imgur.com/h18NLjo.png"
+                     alt="Обучение"
+                     class="button-square-photo photo-education">  <!-- ДОБАВЛЕН КЛАСС photo-education -->
                 <div class="section-icon">📚</div>
                 <div class="section-title">ОБУЧЕНИЕ</div>
                 <div class="section-desc">ЕГЭ, ВПР, Олимпиады</div>
             </a>
         </div>
+
+        <!-- ПУТЕШЕСТВИЯ -->
         <div class="col-md-4">
-            <a href="/travel" class="section-card">
+            <a href="/travel" class="section-card" style="position: relative; overflow: visible;">
+                <img src="https://i.imgur.com/rHxnhOp.png"
+                     alt="Путешествия"
+                     class="button-square-photo photo-travel">  <!-- ДОБАВЛЕН КЛАСС photo-travel -->
                 <div class="section-icon">🧳</div>
                 <div class="section-title">ПУТЕШЕСТВИЯ</div>
                 <div class="section-desc">Найди команду для поездки</div>
             </a>
         </div>
+
+        <!-- Мой профиль -->
         <div class="col-md-4">
-            <a href="/ratings" class="section-card">
-                <div class="section-icon">🏆</div>
-                <div class="section-title">РЕЙТИНГИ</div>
-                <div class="section-desc">Таблица лидеров</div>
+            <a href="/ratings" class="section-card" style="position: relative; overflow: visible;">
+                <img src="https://i.imgur.com/p01zsUI.png"
+                     alt="Профиль"
+                     class="button-square-photo photo-profile">  <!-- ДОБАВЛЕН КЛАСС photo-profile -->
+                <div class="section-icon">🤖</div>
+                <div class="section-title">Мой профиль</div>
+                <div class="section-desc">Мои достижения</div>
             </a>
         </div>
     </div>
 </div>
-
 <!-- Популярные маршруты -->
 <div class="container mb-5">
     <div class="routes-card">

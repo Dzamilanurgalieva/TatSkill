@@ -39,27 +39,28 @@
         /* ВСЕ БЛОКИ ОСТАЮТСЯ НЕПРОЗРАЧНЫМИ КАК БЫЛИ */
         .navbar {
             background: rgba(0, 0, 0, 0);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.3); /* Обводка только сверху */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Обводка только снизу */
-            border-left: none; /* Убираем обводку слева */
-            border-right: none; /* Убираем обводку справа */
+            backdrop-filter: blur(px);
+            border-top: 1px solid rgba(255, 255, 255, 0);
+            border-bottom: 1px solid rgba(255, 255, 255, 0);
+            border-left: none;
+            border-right: none;
             padding: 10px 20px;
             position: absolute;
-            top: 20px;
+            top: 0px; /* Убираем отступ сверху */
             left: 0px;
             right: 0px;
             width: auto;
             z-index: 1000;
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            margin-top: -20px; /* Поднять на 1px вверх */
+            margin-top: 0px; /* Убираем отрицательный margin */
             margin-bottom: 0px;
+            box-shadow: none;
         }
 
         .navbar-brand {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #2d7b49;
+            color: #FFFFFF;
         }
         /* ТЕКСТ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
         .language-switch {
@@ -85,8 +86,8 @@
         }
 
         .btn-custom-green:hover {
-            background-color: #1e5a35;
-            border-color: #1e5a35;
+            background-color: #FFFFFF;
+            border-color: #FFFFFF;
         }
 
         .btn-outline-custom-green {
@@ -96,7 +97,7 @@
         }
 
         .btn-outline-custom-green:hover {
-            background-color: #2d7b49;
+            background-color: ##FFFFFF;
             color: white;
         }
 
@@ -109,8 +110,8 @@
             color: white;
             padding: 190px 0;
             position: relative; /* Для затемнения, если нужно */
-            margin-top: -70px; /* Поднять на 1px вверх */
-            margin-bottom: -1px;
+            margin-top: -30px; /* Поднять на 1px вверх */
+            margin-bottom: 0px;
         }
 
         /* Добавьте затемнение, чтобы текст был лучше виден */
@@ -180,7 +181,7 @@
             display: flex;
             flex-direction: column;
             margin-top: 0px;
-            margin-bottom: -50px;
+            margin-bottom: -100px;
             margin-left: 440px;  /* Сдвиг вправо */
         }
 
@@ -253,7 +254,6 @@
         }
 
         /* Базовые стили для всех фото (общее) */
-        /* Базовые стили для всех фото (общее) */
         .button-square-photo {
             position: absolute;    /* Базовое позиционирование */
             object-fit: cover;
@@ -306,7 +306,7 @@
             display: block;
             height: 100%;
             backdrop-filter: blur(6px); /* Эффект матового стекла как у поиска */
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Обводка как у поиска */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Обводка как у поиска */
             z-index: 1;
         }
 

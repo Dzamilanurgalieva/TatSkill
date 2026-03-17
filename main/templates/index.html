@@ -14,7 +14,7 @@
 
     <style>
               body {
-            background-image: url('https://i.imgur.com/5LPeuJ8.jpeg');
+            background-image: url('https://i.postimg.cc/2806X26C/photo-2026-03-17-03-16-21.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -32,7 +32,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0); /* Полупрозрачное черное затемнение */
+            background: rgba(0, 0, 0, 0.5); /* Полупрозрачное черное затемнение */
             z-index: -1; /* Отправляем затемнение назад */
         }
 
@@ -137,56 +137,23 @@
             flex-wrap: wrap;
         }
 
-        .ornament-section {
-            background-image: url('https://i.imgur.com/5gfPNB7.jpeg');
-            background-size: 100% 80px;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-            padding: 0;
-            position: relative;
-            height: 60px; /* Уменьшил с 50px до 15px - стал тоньше */
-            overflow: hidden;
-            margin-top: -8px; /* Поднять на 1px вверх */
-            margin-bottom: -1px; /* Поднять на 1px вниз */
-        }
 
-        .ornament-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.2); /* Черное полупрозрачное затемнение */
-            z-index: 1;
-            pointer-events: none; /* Чтобы не мешало кликам */
-        }
-
-        .ornament-section .container {
-            position: relative;
-            z-index: 2;
-            height: 100%; /* Растягиваем на всю высоту */
-        }
-
-        .ornament-left {
-            display: flex;
-            align-items: center;
-            gap: 90px;
-            flex-wrap: wrap;
-            height: 100%; /* Растягиваем на всю высоту */
-        }
-          /* ДРАКОНЧИК !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+/* ДРАКОНЧИК !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
         .avatar-img {
             width: 150px;
             height: auto;
-            position: fixed;
+            position: fixed !important;
             bottom: 50px;
             right: 0px;
-            z-index: 9999;
+            z-index: 990000 !important;
             cursor: pointer;
             transition: all 0.3s;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            background: transparent !important;
+            opacity: 1 !important;
         }
 
         .avatar-img:hover {
@@ -292,9 +259,10 @@
             object-fit: cover;
             border: none;
             box-shadow: 0 3px 10px rgba(0,0,0,0);
-            z-index: 10;
+            z-index: 5;
             transition: none;
             pointer-events: none;
+
         }
 
         /* Индивидуальные настройки для фото ОБУЧЕНИЕ */
@@ -324,43 +292,45 @@
         }
 
         /* Карточки разделов - теперь однотонные */
+        /* Полупрозрачные карточки */
         .section-card {
-            background: #f8f9fa; /* Убрал градиент, оставил светлый фон */
+            background: rgba(255, 255, 255, 0.2); /* Прозрачный белый как у поиска */
             border-radius: 15px;
-            padding: 40px 20px;
+            padding: 95px 20px;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2); /* Тень как у поиска */
+            transition: transform 0.3s, background 0.3s;
             cursor: pointer;
             text-decoration: none;
-            color: #333;
+            color: white; /* Белый текст */
             display: block;
             height: 100%;
-            border: none;
+            backdrop-filter: blur(6px); /* Эффект матового стекла как у поиска */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Обводка как у поиска */
+            z-index: 1;
         }
 
+        /* При наведении становятся чуть менее прозрачными */
         .section-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+            background: rgba(248, 249, 250, 0.4); /* Менее прозрачный при наведении */
             color: #333;
             text-decoration: none;
         }
 
-        .section-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
-        }
-
+        /* Текст тоже можно сделать слегка прозрачным (опционально) */
         .section-title {
             font-size: 1.8rem;
             font-weight: bold;
             margin-bottom: 10px;
             color: #16a177;
+            text-shadow: 0 2px 4px rgba(0,0,0,0);
         }
 
         .section-desc {
             font-size: 1rem;
-            color: #666;
+            color: #444;
         }
 
         /* Карточка маршрутов */
@@ -531,7 +501,7 @@
                 <img src="https://i.imgur.com/h18NLjo.png"
                      alt="Обучение"
                      class="button-square-photo photo-education">  <!-- ДОБАВЛЕН КЛАСС photo-education -->
-                <div class="section-icon">📚</div>
+                <div class="section-icon"></div>
                 <div class="section-title">ОБУЧЕНИЕ</div>
                 <div class="section-desc">ЕГЭ, ВПР, Олимпиады</div>
             </a>
@@ -543,7 +513,7 @@
                 <img src="https://i.imgur.com/rHxnhOp.png"
                      alt="Путешествия"
                      class="button-square-photo photo-travel">  <!-- ДОБАВЛЕН КЛАСС photo-travel -->
-                <div class="section-icon">🧳</div>
+                <div class="section-icon"></div>
                 <div class="section-title">ПУТЕШЕСТВИЯ</div>
                 <div class="section-desc">Найди команду для поездки</div>
             </a>
@@ -555,7 +525,7 @@
                 <img src="https://i.imgur.com/p01zsUI.png"
                      alt="Профиль"
                      class="button-square-photo photo-profile">  <!-- ДОБАВЛЕН КЛАСС photo-profile -->
-                <div class="section-icon">🤖</div>
+                <div class="section-icon"></div>
                 <div class="section-title">Мой профиль</div>
                 <div class="section-desc">Мои достижения</div>
             </a>

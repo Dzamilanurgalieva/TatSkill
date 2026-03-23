@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>SkillHub — Татарский с AI-репетитором</title>
+    <title>TatarSkill — Татарский с AI-репетитором</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        /* Ваши стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -68,7 +67,7 @@
             color: #1e3a2e;
             font-weight: 700;
             padding: 14px 36px;
-            border-radius: 100px;
+            border-radius: 12px;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(230, 161, 46, 0.3);
         }
@@ -84,7 +83,7 @@
             color: #f5c542;
             font-weight: 600;
             padding: 12px 32px;
-            border-radius: 100px;
+            border-radius: 12px;
             transition: all 0.2s;
         }
         .btn-outline-custom:hover {
@@ -92,12 +91,47 @@
             transform: translateY(-2px);
         }
 
+        /* Стили для кнопок перевода - более круглые */
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(245, 197, 66, 0.5);
+            color: #f5c542;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .lang-btn:hover {
+            background: rgba(245, 197, 66, 0.2);
+            border-color: #f5c542;
+        }
+        .lang-btn.active {
+            background: #f5c542;
+            color: #1e3a2e;
+            border-color: #f5c542;
+        }
+
         .navbar {
+            background: transparent;
+            backdrop-filter: none;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
             background: rgba(10, 31, 15, 0.85);
             backdrop-filter: blur(12px);
-            padding: 16px 0;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(245, 197, 66, 0.2);
         }
+
         .navbar-brand {
             font-size: 1.8rem;
             font-weight: 800;
@@ -453,18 +487,18 @@
 <div class="overlay-gradient"></div>
 
 <div class="ai-widget">
-    <img src="https://i.imgur.com/B1JNg55.png" alt="AI помощник" class="ai-dino" id="dinoBtn">
+    <img src="https://i.imgur.com/B1JNg55.png" alt="ИИ помощник" class="ai-dino" id="dinoBtn">
 </div>
 
 <div class="chat-popup" id="chatPopup">
     <div class="chat-header" id="closeChat">
-        <span><i class="fas fa-robot me-2"></i> AI-репетитор · Татарча</span>
+        <span><i class="fas fa-robot me-2"></i> ИИ-репетитор · Татарча</span>
         <i class="fas fa-times"></i>
     </div>
     <div class="chat-messages" id="chatMessages">
         <div class="d-flex mb-2 justify-content-start">
             <div class="p-3 rounded-4" style="max-width: 85%; background: #2a3a2a; color: #f5c542;">
-                ✨ Исәнмесез! Я AI-репетитор. Помогу выучить татарский, проверю произношение. Спрашивай!
+                ✨ Исәнмесез! Я ИИ-репетитор. Помогу выучить татарский, проверю произношение. Спрашивай!
             </div>
         </div>
     </div>
@@ -474,12 +508,16 @@
     </div>
 </div>
 
-<nav class="navbar fixed-top">
+<nav class="navbar fixed-top" id="navbar">
     <div class="container-custom d-flex justify-content-between align-items-center w-100">
-        <a class="navbar-brand" href="#"><i class="fas fa-crown me-2"></i>SkillHub</a>
-        <div>
+        <a class="navbar-brand" href="#"><i class="fas fa-crown me-2"></i>TatarSkill</a>
+        <div class="d-flex gap-2 align-items-center">
+            <!-- Кнопки перевода -->
+            <button class="lang-btn active" id="langRu">Рус</button>
+            <button class="lang-btn" id="langTt">Тат</button>
+            <!-- Кнопки входа и регистрации -->
             <a href="#" class="btn-outline-custom me-2 d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</a>
-            <a href="#" class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#registerModal">Старт</a>
+            <a href="#" class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#registerModal">Регистрация</a>
         </div>
     </div>
 </nav>
@@ -491,8 +529,8 @@
     <div class="container-custom">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <div class="hero-badge">✨ AI-репетитор говорит по-татарски</div>
-                <h1 class="hero-title">Изучай <span class="gold-gradient">татарский язык</span><br>с умным помощником 24/7</h1>
+                <div class="hero-badge">✨ ИИ-репетитор говорит по-татарски</div>
+                <h1 class="hero-title">Учись <span class="gold-gradient">на родном языке</span><br>с умным помощником 24/7</h1>
                 <p class="fs-5 hero-text mb-4">AI проверяет произношение, делает конспекты, а сообщества и кланы помогают практиковаться с единомышленниками.</p>
                 <div class="d-flex flex-wrap gap-3">
                     <a href="#" class="btn-primary-custom btn-lg px-5" data-bs-toggle="modal" data-bs-target="#registerModal">Начать бесплатно</a>
@@ -519,8 +557,8 @@
 <section id="courses" class="py-5">
     <div class="container-custom">
         <div class="text-center mb-5">
-            <h2 class="section-title">📚 Наши курсы</h2>
-            <p class="section-subtitle fs-5">Первый курс бесплатно по акции! Было 10 000₽ — сейчас 0₽</p>
+            <h2 class="section-title"> Наши курсы</h2>
+            <p class="section-subtitle fs-5">Поробуй учиться сейчас</p>
         </div>
         <div class="row g-4">
             <div class="col-lg-6">
@@ -581,15 +619,15 @@
                 <h3 class="fw-bold text-warning mb-4"><i class="fas fa-trophy me-2"></i>Топ кланы</h3>
                 <div class="clan-card d-flex justify-content-between align-items-center">
                     <div><span class="clan-rank">🥇</span> <span class="fw-bold">Болгарлар</span></div>
-                    <div class="clan-score">12,540 ⭐</div>
+                    <div class="clan-score">364634 ⭐</div>
                 </div>
                 <div class="clan-card d-flex justify-content-between align-items-center mt-3">
                     <div><span class="clan-rank">🥈</span> <span class="fw-bold">Тукай мирасы</span></div>
-                    <div class="clan-score">10,820 ⭐</div>
+                    <div class="clan-score">56346 ⭐</div>
                 </div>
                 <div class="clan-card d-flex justify-content-between align-items-center mt-3">
                     <div><span class="clan-rank">🥉</span> <span class="fw-bold">IT-Татарлар</span></div>
-                    <div class="clan-score">9,760 ⭐</div>
+                    <div class="clan-score">546546⭐</div>
                 </div>
                 <button class="btn-outline-custom w-100 mt-4" data-bs-toggle="modal" data-bs-target="#registerModal">➕ Создать свой клан</button>
             </div>
@@ -612,7 +650,7 @@
 <footer class="pt-5 pb-4">
     <div class="container-custom">
         <div class="row">
-            <div class="col-md-4"><h5 class="text-warning"><i class="fas fa-crown me-2"></i>SkillHub</h5><p class="small opacity-75">Образовательная экосистема на татарском языке. AI-репетитор + сообщества + кланы.</p></div>
+            <div class="col-md-4"><h5 class="text-warning"><i class="fas fa-crown me-2"></i>TatarSkill</h5><p class="small opacity-75">Образовательная экосистема на татарском языке. AI-репетитор + сообщества + кланы.</p></div>
             <div class="col-md-2"><h6 class="text-warning">Обучение</h6><ul class="list-unstyled small"><li><a href="#" class="text-light text-decoration-none opacity-75">Курс татарского</a></li><li><a href="#" class="text-light text-decoration-none opacity-75">AI-ассистент</a></li></ul></div>
             <div class="col-md-2"><h6 class="text-warning">Сообщества</h6><ul class="list-unstyled small"><li><a href="#" class="text-light text-decoration-none opacity-75">Татарская кухня</a></li><li><a href="#" class="text-light text-decoration-none opacity-75">Путешествия</a></li></ul></div>
             <div class="col-md-4"><h6 class="text-warning">Контакты</h6><p class="small opacity-75">Казань, ул. Татарстан, 12<br>support@skillhub.ru</p><div class="d-flex gap-3"><i class="fab fa-telegram opacity-75"></i><i class="fab fa-vk opacity-75"></i></div></div>
@@ -628,7 +666,7 @@
     let conversationHistory = [
         {
             role: "system",
-            content: "Ты — дружелюбный AI-репетитор татарского языка. Твоя задача помогать пользователям изучать татарский язык. Отвечай на русском или татарском языке в зависимости от вопроса пользователя. Если пользователь пишет на татарском, отвечай на татарском. Если на русском — отвечай на русском. Ты должен быть терпеливым, объяснять грамматику, помогать с произношением, давать примеры предложений. Будь вежливым и мотивирующим. Используй приветствия на татарском: 'Исәнмесез!', 'Рәхим итегез!' и т.д. Не используй markdown, только обычный текст."
+            content: "Ты — дружелюбный ИИ-репетитор татарского языка. Твоя задача помогать пользователям изучать татарский язык. Отвечай на русском или татарском языке в зависимости от вопроса пользователя. Если пользователь пишет на татарском, отвечай на татарском. Если на русском — отвечай на русском. Ты должен быть терпеливым, объяснять грамматику, помогать с произношением, давать примеры предложений. Будь вежливым и мотивирующим. Используй приветствия на татарском: 'Исәнмесез!', 'Рәхим итегез!' и т.д. Не используй markdown, только обычный текст."
         }
     ];
 
@@ -645,6 +683,32 @@
             640: { spaceBetween: 16 },
             1024: { spaceBetween: 20 }
         }
+    });
+
+    // Эффект появления навбара при скролле
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 110) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Кнопки перевода
+    const langRu = document.getElementById('langRu');
+    const langTt = document.getElementById('langTt');
+
+    langRu.addEventListener('click', () => {
+        langRu.classList.add('active');
+        langTt.classList.remove('active');
+        console.log('Выбран русский язык');
+    });
+
+    langTt.addEventListener('click', () => {
+        langTt.classList.add('active');
+        langRu.classList.remove('active');
+        console.log('Выбран татарский язык');
     });
 
     // AI Чат с Django Backend
@@ -680,7 +744,6 @@
         }
     }
 
-    // Функция для получения CSRF токена
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -698,13 +761,11 @@
 
     async function getMistralResponse(userMessage) {
         try {
-            // Добавляем сообщение пользователя в историю
             conversationHistory.push({
                 role: "user",
                 content: userMessage
             });
 
-            // Отправляем запрос к Django backend
             const response = await fetch('/api/chat/', {
                 method: 'POST',
                 headers: {
@@ -725,7 +786,6 @@
             const data = await response.json();
             const assistantMessage = data.response;
 
-            // Добавляем ответ в историю
             conversationHistory.push({
                 role: "assistant",
                 content: assistantMessage
